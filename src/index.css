@@ -1,34 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  /* SaaS theme (default) */
-  --color-bg: #06080f;
-  --color-surface: #0d1117;
-  --color-surface-2: #161b22;
-  --color-primary: #3b82f6;
-  --color-primary-hover: #2563eb;
-  --color-accent: #06b6d4;
-  --color-text: #c9d1d9;
-  --color-text-muted: #8b949e;
-  --color-heading: #f0f6fc;
-  --color-border: rgba(240, 246, 252, 0.1);
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --radius-card: 12px;
-  --radius-btn: 8px;
+  /* SaaS theme — OLED black, indigo/cyan accent */
+  --color-bg: #050505;
+  --color-surface: #0f0f0f;
+  --color-surface-2: #161616;
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+  --color-accent: #22d3ee;
+  --color-text: #a1a1aa;
+  --color-text-muted: #52525b;
+  --color-heading: #fafafa;
+  --color-border: rgba(255, 255, 255, 0.07);
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --radius-card: 20px;
+  --radius-btn: 9999px;
+  --gradient-primary: linear-gradient(135deg, #6366f1, #22d3ee);
 }
 
 /* Agency theme tokens — wired up in Phase 6 */
 [data-theme="agency"] {
-  --color-bg: #f8f8f5;
+  --color-bg: #faf9f6;
   --color-surface: #ffffff;
-  --color-surface-2: #f0eeea;
+  --color-surface-2: #f4f2ed;
   --color-primary: #7c3aed;
   --color-primary-hover: #6d28d9;
   --color-accent: #f59e0b;
-  --color-text: #2d2d2d;
-  --color-text-muted: #6b7280;
+  --color-text: #374151;
+  --color-text-muted: #9ca3af;
   --color-heading: #0f0f0f;
-  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border: rgba(0, 0, 0, 0.07);
 }
 
 *, *::before, *::after {
@@ -39,7 +40,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -49,4 +50,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+/* Film grain overlay — fixed, never scrolls, never blocks interaction */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
 }

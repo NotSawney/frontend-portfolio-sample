@@ -1,6 +1,8 @@
 import { useRef } from 'react'
+import { useInView } from 'framer-motion'
 
-// Placeholder — scroll-triggered animation logic added in Phase 3
-export function useScrollReveal() {
-  return useRef(null)
+export function useScrollReveal(options = {}) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.15, ...options })
+  return { ref, isInView }
 }
