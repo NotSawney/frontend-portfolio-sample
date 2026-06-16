@@ -1,7 +1,7 @@
 export default function Footer({ data }) {
   return (
     <footer style={{
-      borderTop: '1px solid rgba(255,255,255,0.06)',
+      borderTop: '1px solid rgba(56,184,248,0.1)',
       padding: '56px 24px',
       backgroundColor: 'var(--color-surface)',
     }}>
@@ -16,19 +16,18 @@ export default function Footer({ data }) {
       }}>
         {/* Brand */}
         <span style={{
-          fontWeight: 800,
-          fontSize: '18px',
-          letterSpacing: '-0.3px',
-          background: 'linear-gradient(135deg, #6366f1, #22d3ee)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
+          fontFamily: 'var(--font-display)',
+          fontWeight: 700,
+          fontSize: '20px',
+          letterSpacing: '0.12em',
+          textTransform: 'uppercase',
+          color: 'var(--color-primary)',
         }}>
           {data.brand}
         </span>
 
         {/* Tagline */}
-        <p style={{ color: 'var(--color-text-muted)', fontSize: '14px', letterSpacing: '0.01em' }}>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '13px', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)' }}>
           {data.tagline}
         </p>
 
@@ -40,12 +39,15 @@ export default function Footer({ data }) {
               href="#"
               style={{
                 color: 'var(--color-text-muted)',
-                fontSize: '13px',
+                fontSize: '11px',
                 fontWeight: 500,
                 textDecoration: 'none',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                fontFamily: 'var(--font-mono)',
                 transition: 'color 0.2s ease',
               }}
-              onMouseEnter={e => (e.target.style.color = 'var(--color-heading)')}
+              onMouseEnter={e => (e.target.style.color = 'var(--color-primary)')}
               onMouseLeave={e => (e.target.style.color = 'var(--color-text-muted)')}
             >
               {link}
@@ -54,9 +56,9 @@ export default function Footer({ data }) {
         </nav>
 
         {/* Divider */}
-        <div style={{ width: '100%', maxWidth: '400px', height: '1px', background: 'rgba(255,255,255,0.05)' }} />
+        <div style={{ width: '100%', maxWidth: '320px', height: '1px', background: 'rgba(56,184,248,0.08)' }} />
 
-        <p style={{ color: 'var(--color-text-muted)', fontSize: '12px', letterSpacing: '0.02em' }}>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '11px', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>
           {data.copyright}
         </p>
       </div>

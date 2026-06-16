@@ -18,7 +18,7 @@ export default function Navbar({ data }) {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  const pillBg = scrolled ? 'rgba(5,5,5,0.88)' : 'rgba(5,5,5,0.55)'
+  const pillBg = scrolled ? 'rgba(6,10,26,0.92)' : 'rgba(6,10,26,0.65)'
 
   return (
     <>
@@ -27,8 +27,8 @@ export default function Navbar({ data }) {
         transform: 'translateX(-50%)', zIndex: 100,
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         background: pillBg,
-        border: '1px solid rgba(255,255,255,0.09)',
-        borderRadius: '9999px',
+        border: '1px solid rgba(56,184,248,0.14)',
+        borderRadius: '3px',
         padding: '6px 6px 6px 22px',
         display: 'flex', alignItems: 'center', gap: '28px',
         maxWidth: 'calc(100vw - 40px)',
@@ -36,72 +36,67 @@ export default function Navbar({ data }) {
       }}>
         <a href="#hero" style={{
           textDecoration: 'none', color: 'var(--color-heading)',
-          fontWeight: 700, fontSize: '16px', letterSpacing: '-0.3px', flexShrink: 0,
+          fontWeight: 700, fontSize: '15px', letterSpacing: '0.12em',
+          textTransform: 'uppercase', flexShrink: 0,
+          fontFamily: 'var(--font-display)',
         }}>
           {data.brand}
         </a>
 
-        {/* Desktop nav — NOTE: no display property in style, Tailwind handles visibility */}
         <nav className="hidden md:flex" style={{ gap: '20px', alignItems: 'center' }}>
           {data.links.map((link) => (
             <a key={link.label} href={link.href} style={{
-              color: 'rgba(255,255,255,0.45)', fontSize: '14px', fontWeight: 500,
-              textDecoration: 'none', whiteSpace: 'nowrap',
+              color: 'rgba(220,232,244,0.4)', fontSize: '12px', fontWeight: 500,
+              textDecoration: 'none', whiteSpace: 'nowrap', letterSpacing: '0.08em',
+              textTransform: 'uppercase', fontFamily: 'var(--font-mono)',
               transition: 'color 0.2s ease',
             }}
-              onMouseEnter={e => (e.target.style.color = 'rgba(255,255,255,0.9)')}
-              onMouseLeave={e => (e.target.style.color = 'rgba(255,255,255,0.45)')}
+              onMouseEnter={e => (e.target.style.color = 'rgba(56,184,248,0.9)')}
+              onMouseLeave={e => (e.target.style.color = 'rgba(220,232,244,0.4)')}
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        {/* Desktop CTA — NOTE: no display property in style */}
         <button className="hidden md:flex items-center" style={{
           background: 'var(--color-primary)', border: 'none',
-          borderRadius: '9999px', padding: '9px 10px 9px 18px',
+          borderRadius: '2px', padding: '9px 20px',
           gap: '10px', cursor: 'pointer', flexShrink: 0,
-          transition: 'transform 0.3s cubic-bezier(0.32,0.72,0,1)',
+          transition: 'background 0.2s ease, transform 0.2s ease',
+          fontFamily: 'var(--font-mono)',
         }}
-          onMouseEnter={e => (e.currentTarget.style.transform = 'scale(0.97)')}
-          onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+          onMouseEnter={e => { e.currentTarget.style.background = 'var(--color-primary-hover)'; e.currentTarget.style.transform = 'scale(0.97)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'var(--color-primary)'; e.currentTarget.style.transform = 'scale(1)' }}
           onMouseDown={e => (e.currentTarget.style.transform = 'scale(0.95)')}
           onMouseUp={e => (e.currentTarget.style.transform = 'scale(0.97)')}
         >
-          <span style={{ color: '#fff', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap' }}>
+          <span style={{ color: '#060a1a', fontSize: '12px', fontWeight: 700, whiteSpace: 'nowrap', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
             {data.cta}
           </span>
-          <span style={{
-            width: '26px', height: '26px', borderRadius: '50%',
-            background: 'rgba(0,0,0,0.25)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '13px', color: '#fff',
-          }}>→</span>
         </button>
 
-        {/* Mobile hamburger — NOTE: no display property in style, Tailwind handles it */}
         <button
           className="flex md:hidden items-center justify-center relative"
           onClick={() => setOpen(!open)}
           style={{
-            width: '38px', height: '38px',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '50%', background: 'rgba(255,255,255,0.05)',
+            width: '36px', height: '36px',
+            border: '1px solid rgba(56,184,248,0.18)',
+            borderRadius: '2px', background: 'rgba(56,184,248,0.05)',
             cursor: 'pointer', flexShrink: 0,
           }}
           aria-label="Toggle menu"
         >
           <motion.span style={{
             display: 'block', width: 16, height: 1.5,
-            background: '#fafafa', borderRadius: 2, position: 'absolute',
+            background: 'var(--color-heading)', borderRadius: 0, position: 'absolute',
           }}
             animate={{ rotate: open ? 45 : 0, y: open ? 0 : -4 }}
             transition={{ duration: 0.3, ease }}
           />
           <motion.span style={{
             display: 'block', width: 16, height: 1.5,
-            background: '#fafafa', borderRadius: 2, position: 'absolute',
+            background: 'var(--color-heading)', borderRadius: 0, position: 'absolute',
           }}
             animate={{ rotate: open ? -45 : 0, y: open ? 0 : 4 }}
             transition={{ duration: 0.3, ease }}
@@ -109,7 +104,6 @@ export default function Navbar({ data }) {
         </button>
       </header>
 
-      {/* Mobile overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -120,9 +114,9 @@ export default function Navbar({ data }) {
             style={{
               position: 'fixed', inset: 0, zIndex: 99,
               backdropFilter: 'blur(32px)', WebkitBackdropFilter: 'blur(32px)',
-              background: 'rgba(5,5,5,0.92)',
+              background: 'rgba(6,10,26,0.97)',
               display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center', gap: '12px',
+              alignItems: 'center', justifyContent: 'center', gap: '8px',
             }}
           >
             {data.links.map((link, i) => (
@@ -134,9 +128,10 @@ export default function Navbar({ data }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.05 + i * 0.07, ease }}
                 style={{
-                  fontSize: '32px', fontWeight: 700,
-                  color: 'rgba(255,255,255,0.85)', textDecoration: 'none',
-                  letterSpacing: '-0.5px',
+                  fontSize: '28px', fontWeight: 700,
+                  color: 'rgba(221,232,244,0.8)', textDecoration: 'none',
+                  letterSpacing: '0.08em', textTransform: 'uppercase',
+                  fontFamily: 'var(--font-display)',
                 }}
               >
                 {link.label}
@@ -148,9 +143,11 @@ export default function Navbar({ data }) {
               transition={{ duration: 0.5, delay: 0.05 + data.links.length * 0.07, ease }}
               onClick={() => setOpen(false)}
               style={{
-                marginTop: '24px', background: 'var(--color-primary)',
-                border: 'none', borderRadius: '9999px', padding: '14px 32px',
-                fontSize: '16px', fontWeight: 600, color: '#fff', cursor: 'pointer',
+                marginTop: '32px', background: 'var(--color-primary)',
+                border: 'none', borderRadius: '2px', padding: '14px 40px',
+                fontSize: '13px', fontWeight: 700, color: '#060a1a', cursor: 'pointer',
+                letterSpacing: '0.08em', textTransform: 'uppercase',
+                fontFamily: 'var(--font-mono)',
               }}
             >
               {data.cta}

@@ -7,82 +7,54 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.8, delay, ease },
 })
 
-function MockDashboard() {
-  const metrics = [
-    { value: '99.99%', label: 'Uptime', color: '#22d3ee' },
-    { value: '1.2ms', label: 'Latency', color: '#6366f1' },
-    { value: '10k+', label: 'Deploys', color: '#a855f7' },
-  ]
-  const bars = [
-    { label: 'production', pct: 94, color: '#6366f1' },
-    { label: 'staging', pct: 72, color: '#22d3ee' },
-    { label: 'preview', pct: 88, color: '#a855f7' },
+function TerminalCard() {
+  const entries = [
+    { key: '"role"', value: '"Full-Stack Developer"', valueColor: '#7acdff' },
+    { key: '"stack"', value: '["React", "Node.js", "Java", "Python"]', valueColor: '#7acdff' },
+    { key: '"experience"', value: '"4+ years"', valueColor: '#c8d8e8' },
+    { key: '"craft"', value: '"Clean code. No excuses."', valueColor: '#c8d8e8' },
+    { key: '"status"', value: '"available for projects"', valueColor: '#38d888' },
   ]
   return (
-    /* Outer shell (double-bezel) */
     <div style={{
-      background: 'rgba(255,255,255,0.02)',
-      border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: '20px',
-      padding: '3px',
+      background: '#04060f',
+      border: '1px solid rgba(56,184,248,0.2)',
+      borderRadius: '2px',
+      overflow: 'hidden',
+      textAlign: 'left',
+      maxWidth: '520px',
+      margin: '0 auto',
     }}>
-      {/* Inner core */}
+      {/* Terminal chrome */}
       <div style={{
-        background: '#0a0a0a',
-        borderRadius: '17px',
-        boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.06)',
-        overflow: 'hidden',
+        padding: '10px 16px',
+        borderBottom: '1px solid rgba(56,184,248,0.1)',
+        background: 'rgba(56,184,248,0.04)',
+        display: 'flex', alignItems: 'center', gap: '8px',
       }}>
-        {/* Window chrome */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 20px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-          {['#ff5f57', '#febc2e', '#28c840'].map(c => (
-            <div key={c} style={{ width: 10, height: 10, borderRadius: '50%', background: c }} />
-          ))}
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: 160, height: 6, borderRadius: 99, background: 'rgba(255,255,255,0.06)' }} />
-          </div>
-        </div>
-
-        {/* Metrics row */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
-          {metrics.map(({ value, label, color }, i) => (
-            <div
-              key={label}
-              style={{
-                padding: '20px 16px',
-                textAlign: 'center',
-                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.05)' : 'none',
-              }}
-            >
-              <div style={{ fontSize: 22, fontWeight: 800, color, marginBottom: 4, letterSpacing: '-0.5px', fontFamily: 'var(--font-sans)' }}>
-                {value}
-              </div>
-              <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                {label}
-              </div>
-            </div>
+        <div style={{ display: 'flex', gap: 5 }}>
+          {['rgba(255,95,87,0.35)', 'rgba(254,188,46,0.35)', 'rgba(40,200,64,0.35)'].map(c => (
+            <div key={c} style={{ width: 8, height: 8, borderRadius: '50%', background: c }} />
           ))}
         </div>
-
-        {/* Activity bars */}
-        <div style={{ padding: '20px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 14 }}>
-            Deployment activity
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(56,184,248,0.4)', marginLeft: '4px', letterSpacing: '0.06em' }}>
+          profile.json
+        </span>
+      </div>
+      {/* JSON content */}
+      <div style={{ padding: '20px 24px 24px', fontFamily: 'var(--font-mono)', fontSize: '13px', lineHeight: 2 }}>
+        <div style={{ color: 'rgba(56,184,248,0.3)' }}>{'{'}</div>
+        {entries.map(({ key, value, valueColor }) => (
+          <div key={key} style={{ paddingLeft: '16px' }}>
+            <span style={{ color: 'rgba(150,180,210,0.4)' }}>{key}: </span>
+            <span style={{ color: valueColor }}>{value}</span>
+            <span style={{ color: 'rgba(56,184,248,0.2)' }}>,</span>
           </div>
-          {bars.map(({ label, pct, color }) => (
-            <div key={label} style={{ marginBottom: 10 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5 }}>
-                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', fontFamily: 'var(--font-sans)' }}>{label}</span>
-                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', fontFamily: 'var(--font-sans)' }}>{pct}%</span>
-              </div>
-              <div style={{ height: 4, borderRadius: 99, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
-                <div style={{
-                  width: `${pct}%`, height: '100%', borderRadius: 99,
-                  background: `linear-gradient(90deg, ${color}, ${color}88)`,
-                }} />
-              </div>
-            </div>
-          ))}
+        ))}
+        <div style={{ color: 'rgba(56,184,248,0.3)' }}>{'}'}</div>
+        <div style={{ paddingTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ color: 'rgba(56,184,248,0.5)' }}>›</span>
+          <span className="cursor-blink" style={{ display: 'inline-block', width: '8px', height: '14px', background: 'rgba(56,184,248,0.5)', verticalAlign: 'middle' }} />
         </div>
       </div>
     </div>
@@ -111,107 +83,101 @@ export default function Hero({ data }) {
           <span style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '8px',
-            background: 'rgba(99,102,241,0.1)',
-            border: '1px solid rgba(99,102,241,0.3)',
-            borderRadius: '9999px',
-            padding: '6px 16px',
-            fontSize: '12px',
-            color: 'var(--color-accent)',
-            fontWeight: 600,
-            letterSpacing: '0.02em',
+            gap: '10px',
+            background: 'rgba(56,184,248,0.06)',
+            border: '1px solid rgba(56,184,248,0.2)',
+            borderRadius: '2px',
+            padding: '7px 16px',
+            fontSize: '11px',
+            color: 'var(--color-primary)',
+            fontWeight: 500,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            fontFamily: 'var(--font-mono)',
           }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-accent)', display: 'inline-block' }} />
+            <span style={{ width: 5, height: 5, background: '#38d888', display: 'inline-block', borderRadius: '50%' }} />
             {data.badge}
           </span>
         </motion.div>
 
-        {/* Headline with gradient on second line */}
+        {/* Headline */}
         <motion.h1 {...fadeUp(0.2)} style={{
-          fontSize: 'clamp(44px, 8vw, 80px)',
-          fontWeight: 800,
-          lineHeight: 1.0,
-          letterSpacing: '-3px',
+          fontSize: 'clamp(44px, 8vw, 82px)',
+          fontWeight: 700,
+          lineHeight: 1.05,
+          letterSpacing: '0.04em',
           marginBottom: '28px',
+          fontFamily: 'var(--font-display)',
         }}>
           <span style={{ color: 'var(--color-heading)', display: 'block' }}>{line1}</span>
-          <span style={{
-            display: 'block',
-            background: 'linear-gradient(135deg, #6366f1 0%, #22d3ee 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>
-            {line2}
-          </span>
+          <span style={{ color: 'var(--color-primary)', display: 'block' }}>{line2}</span>
         </motion.h1>
 
         {/* Subheadline */}
         <motion.p {...fadeUp(0.35)} style={{
-          fontSize: 'clamp(16px, 2.5vw, 19px)',
-          color: 'var(--color-text-muted)',
-          lineHeight: 1.75,
-          maxWidth: '540px',
+          fontSize: 'clamp(15px, 2.2vw, 18px)',
+          color: 'var(--color-text)',
+          lineHeight: 1.8,
+          maxWidth: '500px',
           margin: '0 auto 44px',
+          fontFamily: 'var(--font-body)',
         }}>
           {data.subheadline}
         </motion.p>
 
         {/* CTA buttons */}
-        <motion.div {...fadeUp(0.5)} style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '72px' }}>
-          {/* Primary — button-in-button */}
+        <motion.div {...fadeUp(0.5)} style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '64px' }}>
+          {/* Primary */}
           <button
             style={{
               background: 'var(--color-primary)',
               border: 'none',
-              borderRadius: '9999px',
-              padding: '13px 12px 13px 24px',
+              borderRadius: '2px',
+              padding: '13px 28px',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '12px',
+              gap: '10px',
               cursor: 'pointer',
-              transition: 'transform 0.3s cubic-bezier(0.32,0.72,0,1)',
+              fontFamily: 'var(--font-mono)',
+              transition: 'background 0.2s ease, transform 0.2s ease',
             }}
-            onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.03)')}
-            onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--color-primary-hover)'; e.currentTarget.style.transform = 'scale(1.02)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'var(--color-primary)'; e.currentTarget.style.transform = 'scale(1)' }}
             onMouseDown={e => (e.currentTarget.style.transform = 'scale(0.98)')}
-            onMouseUp={e => (e.currentTarget.style.transform = 'scale(1.03)')}
+            onMouseUp={e => (e.currentTarget.style.transform = 'scale(1.02)')}
           >
-            <span style={{ color: '#fff', fontSize: '15px', fontWeight: 600 }}>{data.cta.primary}</span>
-            <span style={{
-              width: '32px', height: '32px', borderRadius: '50%',
-              background: 'rgba(0,0,0,0.22)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '15px', color: '#fff',
-            }}>→</span>
+            <span style={{ color: '#060a1a', fontSize: '13px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{data.cta.primary}</span>
+            <span style={{ color: 'rgba(6,10,26,0.6)', fontSize: '14px' }}>→</span>
           </button>
 
-          {/* Secondary — ghost */}
+          {/* Secondary */}
           <button style={{
             background: 'transparent',
-            border: '1px solid rgba(255,255,255,0.12)',
-            borderRadius: '9999px',
+            border: '1px solid rgba(56,184,248,0.22)',
+            borderRadius: '2px',
             padding: '13px 28px',
-            fontSize: '15px',
+            fontSize: '13px',
             fontWeight: 500,
-            color: 'var(--color-text)',
+            color: 'rgba(56,184,248,0.7)',
             cursor: 'pointer',
+            fontFamily: 'var(--font-mono)',
+            letterSpacing: '0.04em',
             transition: 'border-color 0.2s ease, color 0.2s ease',
           }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.color = 'var(--color-heading)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'var(--color-text)' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(56,184,248,0.5)'; e.currentTarget.style.color = 'var(--color-primary)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(56,184,248,0.22)'; e.currentTarget.style.color = 'rgba(56,184,248,0.7)' }}
           >
             {data.cta.secondary}
           </button>
         </motion.div>
 
-        {/* Mock product UI */}
+        {/* Terminal card */}
         <motion.div
           initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1.1, delay: 0.7, ease }}
         >
-          <MockDashboard />
+          <TerminalCard />
         </motion.div>
       </div>
     </section>
